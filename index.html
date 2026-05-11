@@ -1,12 +1,239 @@
 <!doctype html>
-<html lang="en">
+<html lang="sr">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Elegant Draskovic</title>
-    <link rel="stylesheet" href="/style.css" />
+    <title>Elegant Drašković</title>
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <script type="module" src="/script.js"></script>
+    <header class="navbar">
+      <div class="container nav-inner">
+        <a class="logo" href="#hero">Elegant Drašković</a>
+        <nav>
+          <ul class="nav-links">
+            <li><a href="#hero">Početna</a></li>
+            <li><a href="#prodaja">Prodaja</a></li>
+            <li><a href="#izdavanje">Izdavanje</a></li>
+            <li><a href="#dogadjaji">Događaji</a></li>
+            <li><a href="#kontakt">Kontakt</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero" id="hero">
+        <div class="hero-logo-image" aria-hidden="true"></div>
+        <div class="hero-logo-blur">ED</div>
+        <div class="container hero-content">
+          <span class="eyebrow">Nekretnine sa stilom</span>
+          <h1>
+            <span class="hero-title-elegant">Elegant</span>
+            <span class="hero-title-draskovic">DRAŠKOVIĆ</span>
+          </h1>
+          <p>
+            Elegant Drašković kombinuje luksuzni dizajn, pouzdanu podršku i
+            vrhunske lokacije za svakog klijenta.
+          </p>
+          <div class="hero-actions">
+            <a class="cta-button" href="#prodaja">Prodaja</a>
+            <a class="secondary-button" href="#izdavanje">Izdavanje</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="filters" id="filter">
+        <div class="container">
+          <h2>Pronađite svoju novu nekretninu</h2>
+          <div class="filter-group">
+            <input
+              class="filter-input"
+              type="search"
+              id="searchInput"
+              placeholder="Pretraga po lokaciji, tipu ili opisu"
+              aria-label="Pretraga nekretnina"
+            />
+            <select
+              class="filter-input"
+              id="typeSelect"
+              aria-label="Izaberite tip oglasa"
+            >
+              <option value="all">Sve</option>
+              <option value="prodaja">Prodaja</option>
+              <option value="izdavanje">Izdavanje</option>
+            </select>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="prodaja">
+        <div class="container">
+          <div class="section-header">
+            <p class="section-label">Prodaja</p>
+            <h2>Izabrane nekretnine za kupovinu</h2>
+          </div>
+          <div class="cards-grid">
+            <article class="property-card" data-type="prodaja">
+              <div class="property-image sale-image">Stan</div>
+              <div class="property-card-body">
+                <h3>Panoramski apartman</h3>
+                <p class="property-location">Novi Beograd</p>
+                <p class="property-meta">3 sobe · 110 m²</p>
+                <p class="property-price">€ 285,000</p>
+              </div>
+            </article>
+            <article class="property-card" data-type="prodaja">
+              <div class="property-image sale-image">Vila</div>
+              <div class="property-card-body">
+                <h3>Porodična vila</h3>
+                <p class="property-location">Dedinje</p>
+                <p class="property-meta">5 soba · 320 m²</p>
+                <p class="property-price">€ 1,450,000</p>
+              </div>
+            </article>
+            <article class="property-card" data-type="prodaja">
+              <div class="property-image sale-image">Lo</div>
+              <div class="property-card-body">
+                <h3>Loft u starom gradu</h3>
+                <p class="property-location">Savski venac</p>
+                <p class="property-meta">2 sobe · 85 m²</p>
+                <p class="property-price">€ 375,000</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-alt" id="izdavanje">
+        <div class="container">
+          <div class="section-header">
+            <p class="section-label">Izdavanje</p>
+            <h2>Premium stanovi i poslovni prostori</h2>
+          </div>
+          <div class="cards-grid">
+            <article class="property-card" data-type="izdavanje">
+              <div class="property-image rent-image">A</div>
+              <div class="property-card-body">
+                <h3>Elegant apartman</h3>
+                <p class="property-location">Stari grad</p>
+                <p class="property-meta">2 sobe · 72 m²</p>
+                <p class="property-price">€ 1,850 / mesečno</p>
+              </div>
+            </article>
+            <article class="property-card" data-type="izdavanje">
+              <div class="property-image rent-image">P</div>
+              <div class="property-card-body">
+                <h3>Poslovni prostor</h3>
+                <p class="property-location">Novi Beograd</p>
+                <p class="property-meta">Open space · 150 m²</p>
+                <p class="property-price">€ 3,900 / mesečno</p>
+              </div>
+            </article>
+            <article class="property-card" data-type="izdavanje">
+              <div class="property-image rent-image">G</div>
+              <div class="property-card-body">
+                <h3>Garsonjera</h3>
+                <p class="property-location">Vračar</p>
+                <p class="property-meta">1 soba · 38 m²</p>
+                <p class="property-price">€ 850 / mesečno</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="dogadjaji">
+        <div class="container">
+          <div class="section-header">
+            <p class="section-label">Događaji</p>
+            <h2>Otvoreni dani i ekskluzivne prezentacije</h2>
+          </div>
+          <div class="events-grid">
+            <article class="event-card">
+              <div class="event-image">OD</div>
+              <div class="event-content">
+                <h3>Otvoreni dan: Novi Beograd</h3>
+                <p class="event-date">20. maj 2026</p>
+                <p>
+                  Posetite ekskluzivnu prezentaciju stanova sa pogledom na reku
+                  i propratnu uslugu.
+                </p>
+              </div>
+            </article>
+            <article class="event-card">
+              <div class="event-image">VP</div>
+              <div class="event-content">
+                <h3>Video prezentacija projekata</h3>
+                <p class="event-date">27. maj 2026</p>
+                <p>
+                  Online pregled luksuznih vila i poslovnih prostora uz vodiča
+                  tima Elegant Drašković.
+                </p>
+              </div>
+            </article>
+            <article class="event-card">
+              <div class="event-image">D</div>
+              <div class="event-content">
+                <h3>Dan investicija</h3>
+                <p class="event-date">3. jun 2026</p>
+                <p>
+                  Posetite prezentaciju najboljih investicionih prilika za
+                  nekretnine u Srbiji.
+                </p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-contact" id="kontakt">
+        <div class="container contact-grid">
+          <div>
+            <p class="section-label">Kontakt</p>
+            <h2>Za brzu konsultaciju i pomoć</h2>
+            <p class="contact-description">
+              Pošaljite nam poruku ili nas pozovite direktno. Naš tim je spreman
+              da pronađe vašu novu nekretninu ili poslovni prostor.
+            </p>
+            <ul class="contact-list">
+              <li><strong>Telefon:</strong> +381 63 663 518</li>
+              <li><strong>Email:</strong> office@elegantdraskovic.rs</li>
+              <li><strong>Adresa:</strong> Heroja Maricica, Vrnjačka Banja</li>
+            </ul>
+          </div>
+          <form class="contact-form" id="contactForm">
+            <input
+              type="text"
+              id="nameInput"
+              placeholder="Ime i prezime"
+              required
+            />
+            <input
+              type="email"
+              id="emailInput"
+              placeholder="Email adresa"
+              required
+            />
+            <textarea
+              id="messageInput"
+              rows="5"
+              placeholder="Kako vam možemo pomoći?"
+              required
+            ></textarea>
+            <button class="submit-btn" type="submit">Pošalji poruku</button>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer-inner">
+        <p>Elegant Drašković • Nekretnine sa poverenjem</p>
+        <p>© 2026 Elegant Drašković</p>
+      </div>
+    </footer>
+
+    <script type="module" src="script.js"></script>
   </body>
 </html>
