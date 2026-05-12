@@ -495,23 +495,10 @@ body {
   margin-top: 30px;
 }
 
-.map-placeholder {
-  height: 200px;
-  background: linear-gradient(135deg, var(--navy-light), var(--navy-mid));
-  border: 1px solid var(--border);
+.map-container iframe {
   border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--text-secondary);
-  font-weight: 600;
-  transition: all 0.3s ease;
-  cursor: pointer;
-}
-
-.map-container a:hover .map-placeholder {
-  border-color: var(--gold);
-  color: var(--gold);
+  border: 1px solid var(--border);
+  display: block;
 }
 
 /* Contact Form */
