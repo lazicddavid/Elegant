@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // Success message
       alert(
-        `Hvala vam, ${name}! Primili smo vašu poruku. Kontaktiraćemo vas na ${email} uskoro.`,
+        `Hvala Vam, ${name}! Primili smo vašu poruku. Kontaktiraćemo vas na ${email} uskoro.`,
       );
 
       // Reset form

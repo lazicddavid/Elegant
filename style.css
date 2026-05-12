@@ -74,6 +74,11 @@ body {
   text-transform: uppercase;
 }
 
+.logo-text:hover {
+  color: gold;
+  transition: color 0.9s ease;
+}
+
 .logo-tagline {
   font-size: 11px;
   color: var(--gold);
@@ -471,6 +476,13 @@ body {
   justify-content: center;
   color: var(--text-secondary);
   font-weight: 600;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.map-container a:hover .map-placeholder {
+  border-color: var(--gold);
+  color: var(--gold);
 }
 
 /* Contact Form */
@@ -649,6 +661,6 @@ body {
   }
 
   .nav-link {
-    font-size: 12px;
+    font-size: 14px;
   }
 }
