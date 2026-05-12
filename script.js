@@ -1,45 +1,57 @@
-document.addEventListener('DOMContentLoaded', () => {
-  const searchInput = document.getElementById('searchInput');
-  const typeSelect = document.getElementById('typeSelect');
-  const propertyCards = Array.from(document.querySelectorAll('.property-card'));
-  const contactForm = document.getElementById('contactForm');
+document.addEventListener("DOMContentLoaded", () => {
+  // Contact form
+  const contactForm = document.getElementById("contactForm");
+  if (contactForm) {
+    contactForm.addEventListener("submit", (e) => {
+      e.preventDefault();
 
-  const filterProperties = () => {
-    const query = searchInput.value.trim().toLowerCase();
-    const selectedType = typeSelect.value;
+      const name = document.getElementById("nameInput").value.trim();
+      const email = document.getElementById("emailInput").value.trim();
+      const phone = document.getElementById("phoneInput").value.trim();
+      const category = document.getElementById("categoryInput").value;
+      const message = document.getElementById("messageInput").value.trim();
 
-    propertyCards.forEach((card) => {
-      const title = card.querySelector('h3').textContent.toLowerCase();
-      const location = card.querySelector('.property-location').textContent.toLowerCase();
-      const description = card.querySelector('.property-meta').textContent.toLowerCase();
-      const type = card.dataset.type;
-      const matchesQuery = !query || title.includes(query) || location.includes(query) || description.includes(query);
-      const matchesType = selectedType === 'all' || type === selectedType;
-      card.style.display = matchesQuery && matchesType ? 'grid' : 'none';
+      // Validation
+      if (!name || !email || !category || !message) {
+        alert("Molimo popunite sva obavezna polja!");
+        return;
+      }
+
+      // Email validation
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        alert("Molimo unesite validan email!");
+        return;
+      }
+
+      // Success message
+      alert(
+        `Hvala vam, ${name}! Primili smo vašu poruku. Kontaktiraćemo vas na ${email} uskoro.`,
+      );
+
+      // Reset form
+      contactForm.reset();
+
+      // Log data for debugging (in real app, send to server)
+      console.log({
+        name: name,
+        email: email,
+        phone: phone,
+        category: category,
+        message: message,
+        timestamp: new Date().toISOString(),
+      });
     });
-  };
+  }
 
-  searchInput.addEventListener('input', filterProperties);
-  typeSelect.addEventListener('change', filterProperties);
-
-  propertyCards.forEach((card) => {
-    card.addEventListener('click', () => {
-      card.classList.toggle('active');
+  // Smooth scroll za linkove
+  document.querySelectorAll('a[href^="#"]').forEach((link) => {
+    link.addEventListener("click", (e) => {
+      const target = document.querySelector(link.getAttribute("href"));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: "smooth" });
+      }
     });
-  });
-
-  contactForm.addEventListener('submit', (event) => {
-    event.preventDefault();
-    const name = document.getElementById('nameInput').value.trim();
-    const email = document.getElementById('emailInput').value.trim();
-    const message = document.getElementById('messageInput').value.trim();
-
-    if (!name || !email || !message) {
-      alert('Molimo popunite sva polja pre slanja.');
-      return;
-    }
-
-    alert(`Hvala ${name}! Vaša poruka je poslata. Javićemo se uskoro.`);
-    contactForm.reset();
   });
 });
