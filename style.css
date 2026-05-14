@@ -683,11 +683,11 @@ body {
 /* Scroll to top button */
 .scroll-top {
   position: fixed;
-  bottom: 30px;
-  right: 30px;
-  width: 50px;
-  height: 50px;
-  background: linear-gradient(160deg, #edd84e 0%, #c49828 100%);
+  bottom: 32px;
+  right: 32px;
+  width: 52px;
+  height: 52px;
+  background: linear-gradient(150deg, #f0d060 0%, #c49828 100%);
   border: none;
   border-radius: 50%;
   cursor: pointer;
@@ -695,17 +695,17 @@ body {
   transform: translateY(10px);
   transition: opacity 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
   z-index: 999;
-  font-family: "University Roman Std", serif;
-  font-size: 26px;
-  color: #060e1f;
-  line-height: 1;
   display: flex;
   align-items: center;
   justify-content: center;
   box-shadow:
-    0 5px 0 #8a6412,
-    0 8px 24px rgba(0, 0, 0, 0.5),
-    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+    0 5px 0 #7a5810,
+    0 9px 28px rgba(0, 0, 0, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.35);
+}
+
+.scroll-top svg {
+  transition: transform 0.2s ease;
 }
 
 .scroll-top.visible {
@@ -714,11 +714,15 @@ body {
 }
 
 .scroll-top:hover {
-  transform: translateY(3px);
+  transform: translateY(4px);
   box-shadow:
-    0 2px 0 #8a6412,
+    0 1px 0 #7a5810,
     0 5px 16px rgba(0, 0, 0, 0.4),
-    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+    inset 0 1px 0 rgba(255, 255, 255, 0.35);
+}
+
+.scroll-top:hover svg {
+  transform: translateY(-3px);
 }
 
 /* Respect reduced motion preference */
