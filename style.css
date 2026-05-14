@@ -841,6 +841,10 @@ body {
     font-size: 16px;
   }
 
+  .hero-phone a {
+    font-size: 17px;
+  }
+
   .hero-cta {
     flex-direction: column;
   }
