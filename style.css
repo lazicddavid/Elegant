@@ -695,6 +695,10 @@ body {
   transform: translateY(10px);
   transition: opacity 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
   z-index: 999;
+  font-family: "University Roman Std", serif;
+  font-size: 26px;
+  color: #060e1f;
+  line-height: 1;
   display: flex;
   align-items: center;
   justify-content: center;
