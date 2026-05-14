@@ -100,6 +100,7 @@ document.addEventListener("DOMContentLoaded", () => {
       scrollTopBtn.classList.toggle("visible", window.scrollY > 400);
     });
     scrollTopBtn.addEventListener("click", () => {
+      if (navigator.vibrate) navigator.vibrate(22);
       window.scrollTo({ top: 0, behavior: "smooth" });
     });
   }
