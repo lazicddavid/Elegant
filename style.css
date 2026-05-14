@@ -419,6 +419,17 @@ body {
   margin-bottom: 15px;
 }
 
+/* O nama logo */
+.onama-logo {
+  height: 1.1em;
+  width: auto;
+  vertical-align: middle;
+  margin-left: 14px;
+  border-radius: 4px;
+  mix-blend-mode: multiply;
+  opacity: 0.9;
+}
+
 /* About Section */
 .about-grid {
   display: grid;
