@@ -498,12 +498,22 @@ body {
 .object-location {
   background: rgba(26, 86, 219, 0.08);
   border-left: 3px solid var(--gold);
-  padding: 20px 24px;
+  padding: 24px 28px;
   border-radius: 0 8px 8px 0;
   margin-bottom: 50px;
   color: var(--text-secondary);
   font-size: 16px;
   line-height: 1.8;
+}
+
+.object-location p + p {
+  margin-top: 14px;
+}
+
+.object-location-cta {
+  margin-top: 18px !important;
+  color: var(--gold) !important;
+  font-weight: 600;
 }
 
 .features-grid {
