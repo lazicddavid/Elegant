@@ -444,6 +444,15 @@ body {
 
 .stat {
   text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.stat:hover {
+  transform: translateY(-4px);
+}
+
+.stat:hover .stat-number {
+  color: var(--gold);
 }
 
 .stat-number {
