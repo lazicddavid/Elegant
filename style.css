@@ -106,15 +106,6 @@ body {
   vertical-align: middle;
 }
 
-.logo-tagline {
-  font-size: 18px;
-  color: var(--gold);
-  letter-spacing: 2.5px;
-  text-transform: uppercase;
-  font-weight: 700;
-  margin: 4px 0 0 0;
-}
-
 /* Navigation */
 .nav-list {
   list-style: none;
