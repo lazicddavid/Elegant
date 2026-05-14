@@ -434,6 +434,10 @@ body {
   color: var(--white);
 }
 
+.name-draskovic {
+  color: var(--text-secondary);
+}
+
 .about-text p {
   color: var(--text-secondary);
   margin-bottom: 20px;
