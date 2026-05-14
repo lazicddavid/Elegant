@@ -715,7 +715,19 @@ body {
 
 @media (max-width: 768px) {
   .logo-text {
-    font-size: 18px;
+    font-size: 22px;
+  }
+
+  .logo-elegant {
+    font-size: 36px;
+  }
+
+  .logo-tagline {
+    font-size: 12px;
+  }
+
+  .nav-link {
+    font-size: 15px;
   }
 
   .nav-toggle {
@@ -740,9 +752,10 @@ body {
     display: none;
     flex-direction: column;
     gap: 10px;
-    align-items: flex-start;
+    align-items: flex-end;
     padding: 15px 0;
     border-top: 1px solid var(--border);
+    text-align: right;
   }
 
   .nav-list.nav-open {

@@ -80,6 +80,15 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  // Logo click scrolls to top
+  const logoBrand = document.querySelector(".logo-brand");
+  if (logoBrand) {
+    logoBrand.style.cursor = "pointer";
+    logoBrand.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  }
+
   // Footer year
   const yearEl = document.getElementById("footerYear");
   if (yearEl) yearEl.textContent = new Date().getFullYear();
