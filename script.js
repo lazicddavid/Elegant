@@ -80,6 +80,10 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  // Footer year
+  const yearEl = document.getElementById("footerYear");
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
+
   // Scroll to top
   const scrollTopBtn = document.getElementById("scrollTop");
   if (scrollTopBtn) {
