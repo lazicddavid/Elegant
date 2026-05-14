@@ -560,45 +560,6 @@ body {
   line-height: 1.6;
 }
 
-.object-purchase {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 40px;
-  background: var(--navy-mid);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 36px;
-}
-
-.purchase-col h3 {
-  font-size: 18px;
-  color: var(--gold);
-  margin-bottom: 16px;
-}
-
-.purchase-list {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.purchase-list li {
-  color: var(--text-secondary);
-  font-size: 14px;
-  padding-left: 20px;
-  position: relative;
-  line-height: 1.5;
-}
-
-.purchase-list li::before {
-  content: "✓";
-  position: absolute;
-  left: 0;
-  color: var(--gold);
-  font-weight: 700;
-}
-
 /* Contact Section */
 .contact-grid {
   display: grid;
