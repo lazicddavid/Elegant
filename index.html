@@ -4,7 +4,17 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Elegant Drašković - Premium nekretnine u Vrnjačkoj Banji</title>
+    <meta name="description" content="Elegant Drašković - Ekskluzivna ponuda premium nekretnina u Vrnjačkoj Banji. Prodaja i izdavanje luksuznih stanova i apartmana." />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Elegant Drašković - Premium nekretnine" />
+    <meta property="og:description" content="Ekskluzivna ponuda premium nekretnina u Vrnjačkoj Banji. Prodaja i izdavanje luksuznih stanova i apartmana." />
+    <meta property="og:url" content="https://YOUR_VERCEL_URL" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Elegant Drašković - Premium nekretnine" />
+    <meta name="twitter:description" content="Ekskluzivna ponuda premium nekretnina u Vrnjačkoj Banji. Prodaja i izdavanje luksuznih stanova i apartmana." />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   </head>
   <body>
     <header class="header">
@@ -15,6 +25,11 @@
             <span class="logo-draskovic">Drašković</span>
           </h1>
         </div>
+        <button class="nav-toggle" aria-label="Otvori meni" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
         <nav class="nav">
           <ul class="nav-list">
             <li><a href="#prodaja" class="nav-link">Prodaja</a></li>
@@ -71,12 +86,12 @@
 
       <section class="section" id="prodaja">
         <div class="container">
-          <div class="section-header">
+          <div class="section-header fade-in-el">
             <h2>Prodaja nekretnina</h2>
             <p>Ekskluzivne ponude za kupovinu</p>
           </div>
           <div class="properties-grid">
-            <article class="property-card">
+            <article class="property-card fade-in-el">
               <div class="property-badge">NOVA PONUDA</div>
               <div
                 class="property-image"
@@ -104,7 +119,7 @@
               </div>
             </article>
 
-            <article class="property-card">
+            <article class="property-card fade-in-el">
               <div class="property-badge">POPULARNA</div>
               <div
                 class="property-image"
@@ -132,7 +147,7 @@
               </div>
             </article>
 
-            <article class="property-card">
+            <article class="property-card fade-in-el">
               <div class="property-badge">PREMIUM</div>
               <div
                 class="property-image"
@@ -165,12 +180,12 @@
 
       <section class="section section-alt" id="izdavanje">
         <div class="container">
-          <div class="section-header">
+          <div class="section-header fade-in-el">
             <h2>Izdavanje nekretnina</h2>
             <p>Kvalitetni stanovi za dugoročno ili kratkoročno izdavanje</p>
           </div>
           <div class="properties-grid">
-            <article class="property-card">
+            <article class="property-card fade-in-el">
               <div class="property-badge">DOSTUPNO</div>
               <div
                 class="property-image"
@@ -198,7 +213,7 @@
               </div>
             </article>
 
-            <article class="property-card">
+            <article class="property-card fade-in-el">
               <div class="property-badge">KVALITET</div>
               <div
                 class="property-image"
@@ -226,7 +241,7 @@
               </div>
             </article>
 
-            <article class="property-card">
+            <article class="property-card fade-in-el">
               <div class="property-badge">EKSKLUZIVNO</div>
               <div
                 class="property-image"
@@ -259,12 +274,12 @@
 
       <section class="section section-alt" id="onama">
         <div class="container">
-          <div class="section-header">
+          <div class="section-header fade-in-el">
             <h2>O nama</h2>
             <p>Više godinama iskustva u real estate industriji</p>
           </div>
           <div class="about-grid">
-            <div class="about-text">
+            <div class="about-text fade-in-el">
               <h3>Elegant Drašković - Vaš pouzdan partner</h3>
               <p>
                 Sa godinama iskustva u prodaji i izdavanju nekretnina u
@@ -291,7 +306,7 @@
                 </div>
               </div>
             </div>
-            <div class="about-image">
+            <div class="about-image fade-in-el">
               <div class="placeholder-image">
                 <p>Slika - Ured i tim</p>
               </div>
@@ -302,12 +317,12 @@
 
       <section class="section" id="kontakt">
         <div class="container">
-          <div class="section-header">
+          <div class="section-header fade-in-el">
             <h2>Kontaktiraj nas</h2>
             <p>Otvoren za sva pitanja i zahteve</p>
           </div>
           <div class="contact-grid">
-            <div class="contact-info">
+            <div class="contact-info fade-in-el">
               <h3>Elegant Drašković</h3>
               <div class="contact-item">
                 <span class="icon">📍</span>
@@ -335,7 +350,7 @@
                 <div>
                   <p class="contact-label">Email</p>
                   <p>
-                    <a href="mailto: elegant.mts@gmail.com"
+                    <a href="mailto:elegant.mts@gmail.com"
                       >elegant.mts@gmail.com</a
                     >
                   </p>
@@ -354,25 +369,28 @@
                 ></iframe>
               </div>
             </div>
-            <form class="contact-form" id="contactForm">
+            <form class="contact-form fade-in-el" id="contactForm">
               <input
                 type="text"
                 id="nameInput"
+                name="from_name"
                 placeholder="Ime i prezime"
                 required
               />
               <input
                 type="email"
                 id="emailInput"
+                name="from_email"
                 placeholder="Email adresa"
                 required
               />
               <input
                 type="tel"
                 id="phoneInput"
+                name="phone"
                 placeholder="Telefon (opciono)"
               />
-              <select id="categoryInput" required>
+              <select id="categoryInput" name="category" required>
                 <option value="">-- Izaberi kategoriju --</option>
                 <option value="prodaja">Zainteresovan za prodaju</option>
                 <option value="izdavanje">Zainteresovan za izdavanje</option>
@@ -380,6 +398,7 @@
               </select>
               <textarea
                 id="messageInput"
+                name="message"
                 rows="6"
                 placeholder="Tvoja poruka..."
                 required

@@ -1,5 +1,31 @@
+const EMAILJS_PUBLIC_KEY = "YOUR_PUBLIC_KEY";
+const EMAILJS_SERVICE_ID = "YOUR_SERVICE_ID";
+const EMAILJS_TEMPLATE_ID = "YOUR_TEMPLATE_ID";
+
+emailjs.init(EMAILJS_PUBLIC_KEY);
+
 document.addEventListener("DOMContentLoaded", () => {
-  // Contact form
+  // Hamburger menu
+  const navToggle = document.querySelector(".nav-toggle");
+  const navList = document.querySelector(".nav-list");
+
+  if (navToggle && navList) {
+    navToggle.addEventListener("click", () => {
+      const isOpen = navList.classList.toggle("nav-open");
+      navToggle.classList.toggle("active", isOpen);
+      navToggle.setAttribute("aria-expanded", String(isOpen));
+    });
+
+    navList.querySelectorAll(".nav-link").forEach((link) => {
+      link.addEventListener("click", () => {
+        navList.classList.remove("nav-open");
+        navToggle.classList.remove("active");
+        navToggle.setAttribute("aria-expanded", "false");
+      });
+    });
+  }
+
+  // Contact form with EmailJS
   const contactForm = document.getElementById("contactForm");
   if (contactForm) {
     contactForm.addEventListener("submit", (e) => {
@@ -7,44 +33,43 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const name = document.getElementById("nameInput").value.trim();
       const email = document.getElementById("emailInput").value.trim();
-      const phone = document.getElementById("phoneInput").value.trim();
       const category = document.getElementById("categoryInput").value;
       const message = document.getElementById("messageInput").value.trim();
 
-      // Validation
       if (!name || !email || !category || !message) {
         alert("Molimo popunite sva obavezna polja!");
         return;
       }
 
-      // Email validation
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!emailRegex.test(email)) {
         alert("Molimo unesite validan email!");
         return;
       }
 
-      // Success message
-      alert(
-        `Hvala Vam, ${name}! Primili smo vašu poruku. Kontaktiraćemo vas na ${email} uskoro.`,
-      );
+      const submitBtn = contactForm.querySelector('button[type="submit"]');
+      submitBtn.textContent = "Slanje...";
+      submitBtn.disabled = true;
 
-      // Reset form
-      contactForm.reset();
-
-      // Log data for debugging (in real app, send to server)
-      console.log({
-        name: name,
-        email: email,
-        phone: phone,
-        category: category,
-        message: message,
-        timestamp: new Date().toISOString(),
-      });
+      emailjs
+        .sendForm(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, contactForm)
+        .then(() => {
+          alert(`Hvala Vam, ${name}! Poruka je uspešno poslata.`);
+          contactForm.reset();
+        })
+        .catch(() => {
+          alert(
+            "Greška pri slanju. Pokušajte ponovo ili nas kontaktirajte telefonom.",
+          );
+        })
+        .finally(() => {
+          submitBtn.textContent = "Pošalji poruku";
+          submitBtn.disabled = false;
+        });
     });
   }
 
-  // Smooth scroll za linkove
+  // Smooth scroll
   document.querySelectorAll('a[href^="#"]').forEach((link) => {
     link.addEventListener("click", (e) => {
       const target = document.querySelector(link.getAttribute("href"));
@@ -54,4 +79,76 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   });
+
+  // Fade-in on scroll
+  const fadeEls = document.querySelectorAll(".fade-in-el");
+  if (fadeEls.length) {
+    const fadeObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            fadeObserver.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1 },
+    );
+    fadeEls.forEach((el) => fadeObserver.observe(el));
+  }
+
+  // Animated counters
+  const counters = document.querySelectorAll(".stat-number");
+  if (counters.length) {
+    const counterObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !entry.target.dataset.animated) {
+            entry.target.dataset.animated = "true";
+            animateCounter(entry.target);
+          }
+        });
+      },
+      { threshold: 0.5 },
+    );
+    counters.forEach((c) => counterObserver.observe(c));
+  }
+
+  // Scroll spy
+  const sections = document.querySelectorAll("section[id]");
+  const navLinks = document.querySelectorAll('.nav-link[href^="#"]');
+
+  if (sections.length && navLinks.length) {
+    const spyObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            navLinks.forEach((link) => {
+              link.classList.toggle(
+                "active",
+                link.getAttribute("href") === `#${entry.target.id}`,
+              );
+            });
+          }
+        });
+      },
+      { rootMargin: "-40% 0px -60% 0px" },
+    );
+    sections.forEach((s) => spyObserver.observe(s));
+  }
 });
+
+function animateCounter(el) {
+  const text = el.textContent;
+  const num = parseInt(text);
+  const suffix = text.replace(/\d/g, "");
+  const steps = 60;
+  const increment = num / steps;
+  let step = 0;
+
+  const timer = setInterval(() => {
+    step++;
+    el.textContent = Math.min(Math.round(increment * step), num) + suffix;
+    if (step >= steps) clearInterval(timer);
+  }, 2000 / steps);
+}

@@ -43,7 +43,7 @@ body {
 }
 
 .container {
-  max-width: 1200px;g
+  max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
 }
@@ -135,7 +135,8 @@ body {
   letter-spacing: 1px;
 }
 
-.nav-link:hover {
+.nav-link:hover,
+.nav-link.active {
   color: var(--gold);
   border-bottom-color: var(--gold);
 }
@@ -154,6 +155,39 @@ body {
   background: #c9a03f;
   border-bottom: none;
   color: #060e1f;
+}
+
+/* Hamburger */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.nav-toggle span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--white);
+  transition: all 0.3s ease;
+  border-radius: 2px;
+}
+
+.nav-toggle.active span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.nav-toggle.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.nav-toggle.active span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
 }
 
 /* Hero Section */
@@ -568,6 +602,21 @@ body {
   color: var(--white);
 }
 
+/* Fade-in on scroll */
+.fade-in-el {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.fade-in-el.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.fade-in-el:nth-child(2) { transition-delay: 0.1s; }
+.fade-in-el:nth-child(3) { transition-delay: 0.2s; }
+
 /* Responsive Design */
 @media (max-width: 980px) {
   .about-grid {
@@ -600,16 +649,35 @@ body {
     font-size: 18px;
   }
 
-  .nav-list {
-    flex-direction: column;
-    gap: 10px;
-    align-items: flex-start;
+  .nav-toggle {
+    display: flex;
+  }
+
+  .logo-brand {
+    flex: 1;
   }
 
   .header-inner {
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .nav {
+    width: 100%;
+    order: 3;
+  }
+
+  .nav-list {
+    display: none;
     flex-direction: column;
-    gap: 15px;
+    gap: 10px;
     align-items: flex-start;
+    padding: 15px 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .nav-list.nav-open {
+    display: flex;
   }
 
   .hero {
