@@ -498,22 +498,6 @@ body {
   letter-spacing: 0.5px;
 }
 
-.about-image {
-  height: 300px;
-}
-
-.placeholder-image {
-  height: 100%;
-  background: linear-gradient(135deg, var(--navy-light), var(--navy-mid));
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--text-secondary);
-  font-weight: 600;
-}
-
 /* Object Section */
 .object-location {
   background: rgba(26, 86, 219, 0.08);
