@@ -115,31 +115,32 @@
             <p>Ekskluzivne ponude za kupovinu</p>
           </div>
           <div class="properties-grid">
-            <article class="property-card fade-in-el">
+            <article class="property-card fade-in-el" onclick="openLightbox('apt510', 0)">
               <div class="property-badge">NOVA PONUDA</div>
-              <div
-                class="property-image"
-                style="
-                  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-                "
-              >
-                Studio apartman
+              <div class="property-img-wrap">
+                <img
+                  src="/apartman510/1778974304472489.jpg"
+                  alt="Apartman 510 – Elegant Drašković"
+                  class="property-img"
+                  loading="eager"
+                />
+                <div class="property-img-count">10 slika</div>
               </div>
               <div class="property-body">
-                <h3>Luxury studio sa balkonom</h3>
-                <p class="property-location">Centar Vrnjačke Banje</p>
+                <h3>Apartman 510</h3>
+                <p class="property-location">Heroja Maričića 57a, Vrnjačka Banja</p>
                 <div class="property-specs">
-                  <span>45 m²</span>
-                  <span>1 soba</span>
-                  <span>Parking</span>
+                  <span>— m²</span>
+                  <span>— soba</span>
+                  <span>5. sprat</span>
                 </div>
-                <div class="property-price">€ 125.000</div>
+                <div class="property-price">Cena na upit</div>
                 <button
                   type="button"
                   class="btn btn-outline"
-                  onclick="alert('Više detalja uskoro!')"
+                  onclick="event.stopPropagation(); openLightbox('apt510', 0)"
                 >
-                  Detaljnije
+                  Pogledaj galeriju
                 </button>
               </div>
             </article>
