@@ -427,6 +427,40 @@ body {
   margin-bottom: 15px;
 }
 
+/* Property card – real image */
+.property-img-wrap {
+  position: relative;
+  height: 220px;
+  overflow: hidden;
+}
+
+.property-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.property-card:hover .property-img {
+  transform: scale(1.06);
+}
+
+.property-img-count {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  background: rgba(6, 14, 31, 0.72);
+  color: var(--white);
+  padding: 4px 11px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  pointer-events: none;
+}
+
 
 /* About Section */
 .about-grid {
