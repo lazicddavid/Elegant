@@ -1,3 +1,73 @@
+// Gallery data – keyed by apartment ID
+const GALLERIES = {
+  apt510: {
+    title: 'Apartman 510',
+    items: [
+      { type: 'image', src: '/apartman510/1778974304472489.jpg' },
+      { type: 'image', src: '/apartman510/1778974304919865.jpg' },
+      { type: 'image', src: '/apartman510/1778974305134771.jpg' },
+      { type: 'image', src: '/apartman510/1778974305329195.jpg' },
+      { type: 'image', src: '/apartman510/1778974305700839.jpg' },
+      { type: 'image', src: '/apartman510/1778974305895175.jpg' },
+      { type: 'image', src: '/apartman510/1778974306371886.jpg' },
+      { type: 'image', src: '/apartman510/1778974307521643.jpg' },
+      { type: 'image', src: '/apartman510/1778974308121705.jpg' },
+      { type: 'image', src: '/apartman510/1778974308355764.jpg' },
+    ],
+  },
+};
+
+let lbGallery = null;
+let lbIdx = 0;
+
+window.openLightbox = function (galleryId, index) {
+  lbGallery = GALLERIES[galleryId];
+  if (!lbGallery) return;
+  lbIdx = index;
+
+  const lb = document.getElementById('lightbox');
+  lb.hidden = false;
+  document.body.style.overflow = 'hidden';
+  document.getElementById('lightboxTitle').textContent = lbGallery.title;
+
+  const thumbsEl = document.getElementById('lightboxThumbs');
+  thumbsEl.innerHTML = '';
+  lbGallery.items.forEach((item, i) => {
+    const img = document.createElement('img');
+    img.src = item.src;
+    img.alt = `Slika ${i + 1}`;
+    img.className = 'lightbox-thumb';
+    img.loading = 'lazy';
+    img.addEventListener('click', () => { lbIdx = i; renderLightbox(); });
+    thumbsEl.appendChild(img);
+  });
+
+  renderLightbox();
+};
+
+window.closeLightbox = function () {
+  document.getElementById('lightbox').hidden = true;
+  document.body.style.overflow = '';
+};
+
+window.lightboxNav = function (dir) {
+  if (!lbGallery) return;
+  lbIdx = (lbIdx + dir + lbGallery.items.length) % lbGallery.items.length;
+  renderLightbox();
+};
+
+function renderLightbox() {
+  const item = lbGallery.items[lbIdx];
+  document.getElementById('lightboxImg').src = item.src;
+  document.getElementById('lightboxCounter').textContent =
+    `${lbIdx + 1} / ${lbGallery.items.length}`;
+  document.querySelectorAll('.lightbox-thumb').forEach((t, i) => {
+    const active = i === lbIdx;
+    t.classList.toggle('active', active);
+    if (active) t.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+  });
+}
+
 const EMAILJS_PUBLIC_KEY = "YOUR_PUBLIC_KEY";
 const EMAILJS_SERVICE_ID = "YOUR_SERVICE_ID";
 const EMAILJS_TEMPLATE_ID = "YOUR_TEMPLATE_ID";
