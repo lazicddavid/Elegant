@@ -957,6 +957,23 @@ body {
   transform: translateY(-2px);
 }
 
+.lightbox-thumb-video {
+  background: var(--navy-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gold);
+  border-radius: 3px;
+}
+
+#lightboxVideo {
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 4px;
+  outline: none;
+  background: #000;
+}
+
 @media (max-width: 768px) {
   .lightbox-main {
     padding: 68px 12px 12px;

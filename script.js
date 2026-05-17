@@ -13,6 +13,7 @@ const GALLERIES = {
       { type: 'image', src: '/apartman510/1778974307521643.jpg' },
       { type: 'image', src: '/apartman510/1778974308121705.jpg' },
       { type: 'image', src: '/apartman510/1778974308355764.jpg' },
+      { type: 'video', src: '/apartman510/IMG_2947.MOV' },
     ],
   },
 };
@@ -33,32 +34,62 @@ window.openLightbox = function (galleryId, index) {
   const thumbsEl = document.getElementById('lightboxThumbs');
   thumbsEl.innerHTML = '';
   lbGallery.items.forEach((item, i) => {
-    const img = document.createElement('img');
-    img.src = item.src;
-    img.alt = `Slika ${i + 1}`;
-    img.className = 'lightbox-thumb';
-    img.loading = 'lazy';
-    img.addEventListener('click', () => { lbIdx = i; renderLightbox(); });
-    thumbsEl.appendChild(img);
+    if (item.type === 'video') {
+      const div = document.createElement('div');
+      div.className = 'lightbox-thumb lightbox-thumb-video';
+      div.setAttribute('role', 'button');
+      div.setAttribute('tabindex', '0');
+      div.setAttribute('aria-label', 'Video snimak');
+      div.innerHTML = `<svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>`;
+      div.addEventListener('click', () => { lbIdx = i; renderLightbox(); });
+      thumbsEl.appendChild(div);
+    } else {
+      const img = document.createElement('img');
+      img.src = item.src;
+      img.alt = `Slika ${i + 1}`;
+      img.className = 'lightbox-thumb';
+      img.loading = 'lazy';
+      img.addEventListener('click', () => { lbIdx = i; renderLightbox(); });
+      thumbsEl.appendChild(img);
+    }
   });
 
   renderLightbox();
 };
 
 window.closeLightbox = function () {
+  const videoEl = document.getElementById('lightboxVideo');
+  if (videoEl && !videoEl.paused) videoEl.pause();
   document.getElementById('lightbox').hidden = true;
   document.body.style.overflow = '';
 };
 
 window.lightboxNav = function (dir) {
   if (!lbGallery) return;
+  const videoEl = document.getElementById('lightboxVideo');
+  if (videoEl && !videoEl.paused) videoEl.pause();
   lbIdx = (lbIdx + dir + lbGallery.items.length) % lbGallery.items.length;
   renderLightbox();
 };
 
 function renderLightbox() {
   const item = lbGallery.items[lbIdx];
-  document.getElementById('lightboxImg').src = item.src;
+  const imgEl = document.getElementById('lightboxImg');
+  const videoEl = document.getElementById('lightboxVideo');
+
+  if (item.type === 'video') {
+    imgEl.style.display = 'none';
+    videoEl.style.display = 'block';
+    if (videoEl.src !== location.origin + item.src) {
+      videoEl.src = item.src;
+      videoEl.load();
+    }
+  } else {
+    videoEl.style.display = 'none';
+    imgEl.style.display = 'block';
+    imgEl.src = item.src;
+  }
+
   document.getElementById('lightboxCounter').textContent =
     `${lbIdx + 1} / ${lbGallery.items.length}`;
   document.querySelectorAll('.lightbox-thumb').forEach((t, i) => {
