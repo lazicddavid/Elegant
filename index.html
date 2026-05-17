@@ -126,6 +126,11 @@
                 />
                 <div class="property-img-count">10 slika · video</div>
               </div>
+              <div class="property-img-strip">
+                <img src="/apartman510/1778974304919865.jpg" alt="" class="property-strip-thumb" loading="lazy" onclick="event.stopPropagation(); openLightbox('apt510', 1)" />
+                <img src="/apartman510/1778974305134771.jpg" alt="" class="property-strip-thumb" loading="lazy" onclick="event.stopPropagation(); openLightbox('apt510', 2)" />
+                <img src="/apartman510/1778974305329195.jpg" alt="" class="property-strip-thumb" loading="lazy" onclick="event.stopPropagation(); openLightbox('apt510', 3)" />
+              </div>
               <div class="property-body">
                 <h3>Apartman 510</h3>
                 <p class="property-location">Heroja Maričića 57a, Vrnjačka Banja</p>
@@ -145,31 +150,37 @@
               </div>
             </article>
 
-            <article class="property-card fade-in-el">
-              <div class="property-badge">POPULARNA</div>
-              <div
-                class="property-image"
-                style="
-                  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-                "
-              >
-                2-sobni apartman
+            <article class="property-card fade-in-el" onclick="openLightbox('apt509', 0)">
+              <div class="property-badge">NOVA PONUDA</div>
+              <div class="property-img-wrap">
+                <img
+                  src="/apartman509/1779018843368837.jpg"
+                  alt="Apartman 509 – Elegant Drašković"
+                  class="property-img"
+                  loading="lazy"
+                />
+                <div class="property-img-count">9 slika · video</div>
+              </div>
+              <div class="property-img-strip">
+                <img src="/apartman509/1779018843614114.jpg" alt="" class="property-strip-thumb" loading="lazy" onclick="event.stopPropagation(); openLightbox('apt509', 1)" />
+                <img src="/apartman509/1779018843807355.jpg" alt="" class="property-strip-thumb" loading="lazy" onclick="event.stopPropagation(); openLightbox('apt509', 2)" />
+                <img src="/apartman509/1779018844131464.jpg" alt="" class="property-strip-thumb" loading="lazy" onclick="event.stopPropagation(); openLightbox('apt509', 3)" />
               </div>
               <div class="property-body">
-                <h3>Moderan apartman sa pogledom</h3>
-                <p class="property-location">Novo naselje</p>
+                <h3>Apartman 509</h3>
+                <p class="property-location">Heroja Maričića 57a, Vrnjačka Banja</p>
                 <div class="property-specs">
-                  <span>75 m²</span>
-                  <span>2 sobe</span>
-                  <span>Garaža</span>
+                  <span>— m²</span>
+                  <span>— soba</span>
+                  <span>5. sprat</span>
                 </div>
-                <div class="property-price">€ 185.000</div>
+                <div class="property-price">Cena na upit</div>
                 <button
                   type="button"
                   class="btn btn-outline"
-                  onclick="alert('Više detalja uskoro!')"
+                  onclick="event.stopPropagation(); openLightbox('apt509', 0)"
                 >
-                  Detaljnije
+                  Pogledaj galeriju
                 </button>
               </div>
             </article>
@@ -620,6 +631,7 @@
           id="lightboxVideo"
           controls
           playsinline
+          muted
           style="display: none"
         ></video>
         <button

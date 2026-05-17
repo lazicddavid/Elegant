@@ -16,6 +16,21 @@ const GALLERIES = {
       { type: 'video', src: '/apartman510/IMG_2947.MOV' },
     ],
   },
+  apt509: {
+    title: 'Apartman 509',
+    items: [
+      { type: 'image', src: '/apartman509/1779018843368837.jpg' },
+      { type: 'image', src: '/apartman509/1779018843614114.jpg' },
+      { type: 'image', src: '/apartman509/1779018843807355.jpg' },
+      { type: 'image', src: '/apartman509/1779018844131464.jpg' },
+      { type: 'image', src: '/apartman509/1779018844716198.jpg' },
+      { type: 'image', src: '/apartman509/1779018844965055.jpg' },
+      { type: 'image', src: '/apartman509/1779018845199193.jpg' },
+      { type: 'image', src: '/apartman509/1779018845782670.jpg' },
+      { type: 'image', src: '/apartman509/1779018845996876.jpg' },
+      { type: 'video', src: '/apartman509/IMG_2935.MOV' },
+    ],
+  },
 };
 
 let lbGallery = null;
@@ -54,7 +69,7 @@ window.openLightbox = function (galleryId, index) {
     }
   });
 
-  renderLightbox();
+  renderLightbox(true);
 };
 
 window.closeLightbox = function () {
@@ -72,31 +87,43 @@ window.lightboxNav = function (dir) {
   renderLightbox();
 };
 
-function renderLightbox() {
-  const item = lbGallery.items[lbIdx];
+function renderLightbox(skipAnim) {
   const imgEl = document.getElementById('lightboxImg');
   const videoEl = document.getElementById('lightboxVideo');
 
-  if (item.type === 'video') {
-    imgEl.style.display = 'none';
-    videoEl.style.display = 'block';
-    if (videoEl.src !== location.origin + item.src) {
-      videoEl.src = item.src;
-      videoEl.load();
+  const apply = () => {
+    const item = lbGallery.items[lbIdx];
+    if (item.type === 'video') {
+      imgEl.style.display = 'none';
+      videoEl.style.display = 'block';
+      if (videoEl.src !== location.origin + item.src) {
+        videoEl.src = item.src;
+        videoEl.load();
+      }
+      videoEl.play().catch(() => {});
+    } else {
+      videoEl.style.display = 'none';
+      imgEl.style.display = 'block';
+      imgEl.src = item.src;
     }
-  } else {
-    videoEl.style.display = 'none';
-    imgEl.style.display = 'block';
-    imgEl.src = item.src;
-  }
+    document.getElementById('lightboxCounter').textContent =
+      `${lbIdx + 1} / ${lbGallery.items.length}`;
+    document.querySelectorAll('.lightbox-thumb').forEach((t, i) => {
+      const active = i === lbIdx;
+      t.classList.toggle('active', active);
+      if (active) t.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    });
+    imgEl.classList.remove('lb-fading');
+    videoEl.classList.remove('lb-fading');
+  };
 
-  document.getElementById('lightboxCounter').textContent =
-    `${lbIdx + 1} / ${lbGallery.items.length}`;
-  document.querySelectorAll('.lightbox-thumb').forEach((t, i) => {
-    const active = i === lbIdx;
-    t.classList.toggle('active', active);
-    if (active) t.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-  });
+  if (skipAnim) {
+    apply();
+  } else {
+    imgEl.classList.add('lb-fading');
+    videoEl.classList.add('lb-fading');
+    setTimeout(apply, 150);
+  }
 }
 
 const EMAILJS_PUBLIC_KEY = "YOUR_PUBLIC_KEY";
