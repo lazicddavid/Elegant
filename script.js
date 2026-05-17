@@ -13,7 +13,7 @@ const GALLERIES = {
       { type: 'image', src: '/apartman510/1778974307521643.jpg' },
       { type: 'image', src: '/apartman510/1778974308121705.jpg' },
       { type: 'image', src: '/apartman510/1778974308355764.jpg' },
-      { type: 'video', src: '/apartman510/IMG_2947.MOV' },
+      { type: 'video', src: '/apartman510/video.mp4' },
     ],
   },
   apt509: {
@@ -28,7 +28,7 @@ const GALLERIES = {
       { type: 'image', src: '/apartman509/1779018845199193.jpg' },
       { type: 'image', src: '/apartman509/1779018845782670.jpg' },
       { type: 'image', src: '/apartman509/1779018845996876.jpg' },
-      { type: 'video', src: '/apartman509/IMG_2935.MOV' },
+      { type: 'video', src: '/apartman509/video.mp4' },
     ],
   },
 };
