@@ -192,6 +192,32 @@ document.addEventListener("DOMContentLoaded", () => {
     fadeEls.forEach((el) => fadeObserver.observe(el));
   }
 
+  // Lightbox keyboard & touch
+  let lbTouchStartX = 0;
+
+  document.addEventListener('keydown', (e) => {
+    const lb = document.getElementById('lightbox');
+    if (!lb || lb.hidden) return;
+    if (e.key === 'Escape') window.closeLightbox();
+    if (e.key === 'ArrowLeft') window.lightboxNav(-1);
+    if (e.key === 'ArrowRight') window.lightboxNav(1);
+  });
+
+  document.addEventListener('touchstart', (e) => {
+    if (document.getElementById('lightbox')?.hidden !== false) return;
+    lbTouchStartX = e.changedTouches[0].screenX;
+  }, { passive: true });
+
+  document.addEventListener('touchend', (e) => {
+    if (document.getElementById('lightbox')?.hidden !== false) return;
+    const dx = e.changedTouches[0].screenX - lbTouchStartX;
+    if (Math.abs(dx) > 50) window.lightboxNav(dx < 0 ? 1 : -1);
+  }, { passive: true });
+
+  document.getElementById('lightbox')?.addEventListener('click', (e) => {
+    if (e.target.id === 'lightbox') window.closeLightbox();
+  });
+
   // Animated counters
   const counters = document.querySelectorAll(".stat-number");
   if (counters.length) {
