@@ -31,6 +31,22 @@ const GALLERIES = {
       { type: 'video', src: '/apartman509/video.mp4' },
     ],
   },
+  apt511: {
+    title: 'Apartman 511',
+    items: [
+      { type: 'image', src: '/apartman511/1779021088585472.jpg' },
+      { type: 'image', src: '/apartman511/1779021088864320.jpg' },
+      { type: 'image', src: '/apartman511/1779021089131227.jpg' },
+      { type: 'image', src: '/apartman511/1779021089431671.jpg' },
+      { type: 'image', src: '/apartman511/1779021089782099.jpg' },
+      { type: 'image', src: '/apartman511/177902109015118.jpg' },
+      { type: 'image', src: '/apartman511/1779021090299031.jpg' },
+      { type: 'image', src: '/apartman511/1779021090567356.jpg' },
+      { type: 'image', src: '/apartman511/1779021090934849.jpg' },
+      { type: 'image', src: '/apartman511/1779021091184581.jpg' },
+      { type: 'video', src: '/apartman511/video.mp4' },
+    ],
+  },
 };
 
 let lbGallery = null;
