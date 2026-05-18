@@ -126,6 +126,7 @@
                   alt="Apartman 510 – Elegant Drašković"
                   class="property-img"
                   loading="eager"
+                  fetchpriority="high"
                 />
                 <div class="property-img-count">10 slika · video</div>
               </div>
@@ -255,7 +256,10 @@
               </div>
             </article>
 
-            <article class="property-card fade-in-el" onclick="openLightbox('apt511', 0)">
+            <article
+              class="property-card fade-in-el"
+              onclick="openLightbox('apt511', 0)"
+            >
               <div class="property-badge">NOVA PONUDA</div>
               <div class="property-img-wrap">
                 <img
@@ -267,13 +271,42 @@
                 <div class="property-img-count">10 slika · video</div>
               </div>
               <div class="property-img-strip">
-                <img src="/apartman511/1779021088864320.jpg" alt="" class="property-strip-thumb" loading="lazy" onclick="event.stopPropagation(); openLightbox('apt511', 1)" />
-                <img src="/apartman511/1779021089131227.jpg" alt="" class="property-strip-thumb" loading="lazy" onclick="event.stopPropagation(); openLightbox('apt511', 2)" />
-                <img src="/apartman511/1779021089431671.jpg" alt="" class="property-strip-thumb" loading="lazy" onclick="event.stopPropagation(); openLightbox('apt511', 3)" />
+                <img
+                  src="/apartman511/1779021088864320.jpg"
+                  alt=""
+                  class="property-strip-thumb"
+                  loading="lazy"
+                  onclick="
+                    event.stopPropagation();
+                    openLightbox('apt511', 1);
+                  "
+                />
+                <img
+                  src="/apartman511/1779021089131227.jpg"
+                  alt=""
+                  class="property-strip-thumb"
+                  loading="lazy"
+                  onclick="
+                    event.stopPropagation();
+                    openLightbox('apt511', 2);
+                  "
+                />
+                <img
+                  src="/apartman511/1779021089431671.jpg"
+                  alt=""
+                  class="property-strip-thumb"
+                  loading="lazy"
+                  onclick="
+                    event.stopPropagation();
+                    openLightbox('apt511', 3);
+                  "
+                />
               </div>
               <div class="property-body">
                 <h3>Apartman 511</h3>
-                <p class="property-location">Heroja Maričića 57a, Vrnjačka Banja</p>
+                <p class="property-location">
+                  Heroja Maričića 57a, Vrnjačka Banja
+                </p>
                 <div class="property-specs">
                   <span>— m²</span>
                   <span>— soba</span>
@@ -283,7 +316,10 @@
                 <button
                   type="button"
                   class="btn btn-outline"
-                  onclick="event.stopPropagation(); openLightbox('apt511', 0)"
+                  onclick="
+                    event.stopPropagation();
+                    openLightbox('apt511', 0);
+                  "
                 >
                   Pogledaj galeriju
                 </button>
@@ -372,7 +408,7 @@
                 <h3>Luksuzni apartman</h3>
                 <p class="property-location">Terasa</p>
                 <div class="property-specs">
-                  <span>120 m²</span>
+                  <span>70 m²</span>
                   <span>3 sobe</span>
                   <span>Bazen</span>
                 </div>
@@ -407,8 +443,8 @@
               promenade.
             </p>
             <p>
-              Zgrada nudi bogatu ponudu pratećih sadržaja: bazen i džakuzi na 8.
-              etaži sa panoramom od 360° i vazdušnom banjom, panoramski lift,
+              Zgrada nudi bogatu ponudu pratećih sadržaja: bazen na 8. etaži sa
+              panoramom od 360° i vazdušnom banjom, panoramski lift,
               kafić-restoran na 7. etaži sa pokretnom kuhinjom i roštiljem,
               teretana, stoni tenis, perionica i ostava posteljine. U prizemlju
               se nalaze centralna recepcija i lobi bar sa velikom baštom i
@@ -434,7 +470,7 @@
           <div class="features-grid">
             <div class="feature-card fade-in-el">
               <span class="feature-icon">🏊</span>
-              <h3>Bazen & Džakuzi</h3>
+              <h3>Bazen</h3>
               <p>
                 8. etaža sa panoramom od 360° i vazdušnom banjom — jedinstven
                 pogled na Vrnjačku Banju.
