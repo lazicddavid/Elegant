@@ -1003,6 +1003,7 @@ body {
 #lightboxVideo {
   outline: none;
   background: #000;
+  will-change: opacity;
 }
 
 @media (max-width: 768px) {
