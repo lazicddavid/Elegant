@@ -242,7 +242,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (scrollTopBtn) {
     window.addEventListener("scroll", () => {
       scrollTopBtn.classList.toggle("visible", window.scrollY > 400);
-    });
+    }, { passive: true });
     scrollTopBtn.addEventListener("click", () => {
       if (navigator.vibrate) navigator.vibrate(22);
       window.scrollTo({ top: 0, behavior: "smooth" });
