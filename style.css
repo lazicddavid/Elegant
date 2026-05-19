@@ -778,7 +778,10 @@ body {
 .nav-link:focus-visible,
 .contact-form input:focus-visible,
 .contact-form select:focus-visible,
-.contact-form textarea:focus-visible {
+.contact-form textarea:focus-visible,
+.property-card:focus-visible,
+.lightbox-thumb:focus-visible,
+#scrollTop:focus-visible {
   outline: 2px solid var(--gold);
   outline-offset: 3px;
 }
