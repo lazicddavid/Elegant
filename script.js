@@ -81,6 +81,9 @@ window.openLightbox = function (galleryId, index) {
       img.className = 'lightbox-thumb';
       img.loading = 'lazy';
       img.addEventListener('click', () => { lbIdx = i; renderLightbox(); });
+      img.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { lbIdx = i; renderLightbox(); } });
+      img.setAttribute('tabindex', '0');
+      img.setAttribute('role', 'button');
       thumbsEl.appendChild(img);
     }
   });
