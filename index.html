@@ -18,11 +18,17 @@
       content="Ekskluzivna ponuda premium nekretnina u Vrnjačkoj Banji. Prodaja i izdavanje luksuznih stanova i apartmana."
     />
     <meta property="og:url" content="https://YOUR_VERCEL_URL" />
-    <meta property="og:image" content="https://YOUR_VERCEL_URL/apartman510/1778974304472489.jpg" />
+    <meta
+      property="og:image"
+      content="https://YOUR_VERCEL_URL/apartman510/1778974304472489.jpg"
+    />
     <meta property="og:locale" content="sr_RS" />
     <link rel="canonical" href="https://YOUR_VERCEL_URL" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:image" content="https://YOUR_VERCEL_URL/apartman510/1778974304472489.jpg" />
+    <meta
+      name="twitter:image"
+      content="https://YOUR_VERCEL_URL/apartman510/1778974304472489.jpg"
+    />
     <meta
       name="twitter:title"
       content="Elegant Drašković - Premium nekretnine"
@@ -130,7 +136,10 @@
               tabindex="0"
               role="button"
               aria-label="Otvori galeriju – Apartman 510"
-              onkeydown="if(event.key==='Enter'||event.key===' ')openLightbox('apt510',0)"
+              onkeydown="
+                if (event.key === 'Enter' || event.key === ' ')
+                  openLightbox('apt510', 0);
+              "
             >
               <div class="property-badge">NOVA PONUDA</div>
               <div class="property-img-wrap">
@@ -205,7 +214,10 @@
               tabindex="0"
               role="button"
               aria-label="Otvori galeriju – Apartman 509"
-              onkeydown="if(event.key==='Enter'||event.key===' ')openLightbox('apt509',0)"
+              onkeydown="
+                if (event.key === 'Enter' || event.key === ' ')
+                  openLightbox('apt509', 0);
+              "
             >
               <div class="property-badge">NOVA PONUDA</div>
               <div class="property-img-wrap">
@@ -279,7 +291,10 @@
               tabindex="0"
               role="button"
               aria-label="Otvori galeriju – Apartman 511"
-              onkeydown="if(event.key==='Enter'||event.key===' ')openLightbox('apt511',0)"
+              onkeydown="
+                if (event.key === 'Enter' || event.key === ' ')
+                  openLightbox('apt511', 0);
+              "
             >
               <div class="property-badge">NOVA PONUDA</div>
               <div class="property-img-wrap">
@@ -569,14 +584,16 @@
             <div class="about-text fade-in-el">
               <h3>Elegant Drašković - Vaš pouzdan partner</h3>
               <p>
-                Firma <strong>Elegant Drašković</strong> osnovana je 1. januara
-                1990. godine. Više od tri decenije aktivno poslujemo na tržištu
-                nekretnina u Beogradu i Vrnjačkoj Banji, gde smo izgradili
-                reputaciju pouzdanog i direktnog partnera.
+                Firma
+                <strong class="brand-gold">Elegant Drašković</strong> osnovana
+                je 1. januara 1990. godine. Više od tri decenije aktivno
+                poslujemo na tržištu nekretnina u Beogradu i
+                <strong class="brand-gold">Vrnjačkoj Banji</strong>, gde smo
+                izgradili reputaciju pouzdanog i direktnog partnera.
               </p>
               <p>
-                U našem portfoliju nalaze se stanovi, lokali, poslovni objekti
-                i turistički apartmani. Bavimo se i prodajom i izdavanjem —
+                U našem portfoliju nalaze se stanovi, lokali, poslovni objekti i
+                turistički apartmani. Bavimo se i prodajom i izdavanjem —
                 kratkoročnim i dugoročnim — prilagođavajući se potrebama svakog
                 klijenta. Sve dogovore sklapamo direktno, bez posrednika i bez
                 skrivenih troškova.
@@ -584,7 +601,7 @@
               <p>
                 Iza svakog posla stoje konkretni ljudi i konkretna odgovornost.
                 Vraćaju nam se klijenti koji cene lični pristup, poštenu reč i
-                iskustvo koje se gradi godinama — ne improvizuje.
+                iskustvo koje se gradi godinama.
               </p>
               <div class="about-stats">
                 <div class="stat">
@@ -756,7 +773,9 @@
     >
       <div class="lightbox-header">
         <span class="lightbox-title" id="lightboxTitle">Apartman 510</span>
-        <span class="lightbox-counter" id="lightboxCounter" aria-live="polite">1 / 10</span>
+        <span class="lightbox-counter" id="lightboxCounter" aria-live="polite"
+          >1 / 10</span
+        >
         <button
           class="lightbox-close"
           onclick="closeLightbox()"

@@ -483,6 +483,7 @@ body {
 
 .brand-gold {
   color: var(--gold);
+  font-weight: 700;
 }
 
 .about-text p {
