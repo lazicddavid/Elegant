@@ -1,4 +1,3 @@
-// Gallery data – keyed by apartment ID
 const GALLERIES = {
   apt510: {
     title: 'Apartman 510',
@@ -49,297 +48,242 @@ const GALLERIES = {
   },
 };
 
-let lbGallery = null;
-let lbIdx = 0;
-
-window.openLightbox = function (galleryId, index) {
-  lbGallery = GALLERIES[galleryId];
-  if (!lbGallery) return;
-  lbIdx = index;
-
-  const lb = document.getElementById('lightbox');
-  lb.hidden = false;
-  document.body.style.overflow = 'hidden';
-  document.getElementById('lightboxTitle').textContent = lbGallery.title;
-
-  const thumbsEl = document.getElementById('lightboxThumbs');
-  thumbsEl.innerHTML = '';
-  lbGallery.items.forEach((item, i) => {
-    if (item.type === 'video') {
-      const div = document.createElement('div');
-      div.className = 'lightbox-thumb lightbox-thumb-video';
-      div.setAttribute('role', 'button');
-      div.setAttribute('tabindex', '0');
-      div.setAttribute('aria-label', 'Video snimak');
-      div.innerHTML = `<svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>`;
-      div.addEventListener('click', () => { lbIdx = i; renderLightbox(); });
-      thumbsEl.appendChild(div);
-    } else {
-      const img = document.createElement('img');
-      img.src = item.src;
-      img.alt = `Slika ${i + 1}`;
-      img.className = 'lightbox-thumb';
-      img.loading = 'lazy';
-      img.addEventListener('click', () => { lbIdx = i; renderLightbox(); });
-      img.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { lbIdx = i; renderLightbox(); } });
-      img.setAttribute('tabindex', '0');
-      img.setAttribute('role', 'button');
-      thumbsEl.appendChild(img);
-    }
-  });
-
-  renderLightbox(true);
+const DOM = {
+  lightbox:        document.getElementById('lightbox'),
+  lightboxTitle:   document.getElementById('lightboxTitle'),
+  lightboxThumbs:  document.getElementById('lightboxThumbs'),
+  lightboxImg:     document.getElementById('lightboxImg'),
+  lightboxVideo:   document.getElementById('lightboxVideo'),
+  lightboxCounter: document.getElementById('lightboxCounter'),
+  navToggle:       document.querySelector('.nav-toggle'),
+  navList:         document.querySelector('.nav-list'),
+  contactForm:     document.getElementById('contactForm'),
+  scrollTopBtn:    document.getElementById('scrollTop'),
+  logoBrand:       document.querySelector('.logo-brand'),
+  footerYear:      document.getElementById('footerYear'),
+  fadeEls:         document.querySelectorAll('.fade-in-el'),
+  sections:        document.querySelectorAll('section[id]'),
+  navLinks:        document.querySelectorAll('.nav-link[href^="#"]'),
+  smoothLinks:     document.querySelectorAll('a[href^="#"]'),
+  statCounters:    document.querySelectorAll('.stat-number'),
 };
 
-window.closeLightbox = function () {
-  const videoEl = document.getElementById('lightboxVideo');
-  if (videoEl && !videoEl.paused) videoEl.pause();
-  document.getElementById('lightbox').hidden = true;
-  document.body.style.overflow = '';
+const state = {
+  gallery:     null,
+  index:       0,
+  touchStartX: 0,
 };
 
-window.lightboxNav = function (dir) {
-  if (!lbGallery) return;
-  const videoEl = document.getElementById('lightboxVideo');
-  if (videoEl && !videoEl.paused) videoEl.pause();
-  lbIdx = (lbIdx + dir + lbGallery.items.length) % lbGallery.items.length;
-  renderLightbox();
-};
-
-function renderLightbox(skipAnim) {
-  const imgEl = document.getElementById('lightboxImg');
-  const videoEl = document.getElementById('lightboxVideo');
-
-  const apply = () => {
-    const item = lbGallery.items[lbIdx];
-    if (item.type === 'video') {
-      imgEl.style.display = 'none';
-      videoEl.style.display = 'block';
-      if (videoEl.src !== location.origin + item.src) {
-        videoEl.src = item.src;
-        videoEl.load();
-      }
-      videoEl.play().catch(() => {});
-    } else {
-      videoEl.style.display = 'none';
-      imgEl.style.display = 'block';
-      imgEl.src = item.src;
-    }
-    document.getElementById('lightboxCounter').textContent =
-      `${lbIdx + 1} / ${lbGallery.items.length}`;
-    document.querySelectorAll('.lightbox-thumb').forEach((t, i) => {
-      const active = i === lbIdx;
-      t.classList.toggle('active', active);
-      if (active) t.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-    });
-    imgEl.classList.remove('lb-fading');
-    videoEl.classList.remove('lb-fading');
-  };
-
-  if (skipAnim) {
-    apply();
-  } else {
-    imgEl.classList.add('lb-fading');
-    videoEl.classList.add('lb-fading');
-    setTimeout(apply, 150);
-  }
-}
-
-const EMAILJS_PUBLIC_KEY = "YOUR_PUBLIC_KEY";
-const EMAILJS_SERVICE_ID = "YOUR_SERVICE_ID";
-const EMAILJS_TEMPLATE_ID = "YOUR_TEMPLATE_ID";
+const EMAILJS_PUBLIC_KEY  = 'YOUR_PUBLIC_KEY';
+const EMAILJS_SERVICE_ID  = 'YOUR_SERVICE_ID';
+const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';
 
 emailjs.init(EMAILJS_PUBLIC_KEY);
 
-document.addEventListener("DOMContentLoaded", () => {
-  // Hamburger menu
-  const navToggle = document.querySelector(".nav-toggle");
-  const navList = document.querySelector(".nav-list");
+// ─── Lightbox ────────────────────────────────────────────
 
-  if (navToggle && navList) {
-    navToggle.addEventListener("click", () => {
-      const isOpen = navList.classList.toggle("nav-open");
-      navToggle.classList.toggle("active", isOpen);
-      navToggle.setAttribute("aria-expanded", String(isOpen));
-    });
+function pauseVideo() {
+  if (!DOM.lightboxVideo.paused) DOM.lightboxVideo.pause();
+}
 
-    navList.querySelectorAll(".nav-link").forEach((link) => {
-      link.addEventListener("click", () => {
-        navList.classList.remove("nav-open");
-        navToggle.classList.remove("active");
-        navToggle.setAttribute("aria-expanded", "false");
-      });
-    });
-  }
+function updateCounter() {
+  DOM.lightboxCounter.textContent = `${state.index + 1} / ${state.gallery.items.length}`;
+}
 
-  // Contact form with EmailJS
-  const contactForm = document.getElementById("contactForm");
-  if (contactForm) {
-    contactForm.addEventListener("submit", (e) => {
-      e.preventDefault();
-
-      const name = document.getElementById("nameInput").value.trim();
-      const email = document.getElementById("emailInput").value.trim();
-      const category = document.getElementById("categoryInput").value;
-      const message = document.getElementById("messageInput").value.trim();
-
-      if (!name || !email || !category || !message) {
-        alert("Molimo popunite sva obavezna polja!");
-        return;
-      }
-
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(email)) {
-        alert("Molimo unesite validan email!");
-        return;
-      }
-
-      const submitBtn = contactForm.querySelector('button[type="submit"]');
-      submitBtn.textContent = "Slanje...";
-      submitBtn.disabled = true;
-
-      emailjs
-        .sendForm(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, contactForm)
-        .then(() => {
-          alert(`Hvala Vam, ${name}! Poruka je uspešno poslata.`);
-          contactForm.reset();
-        })
-        .catch(() => {
-          alert(
-            "Greška pri slanju. Pokušajte ponovo ili nas kontaktirajte telefonom.",
-          );
-        })
-        .finally(() => {
-          submitBtn.textContent = "Pošalji poruku";
-          submitBtn.disabled = false;
-        });
-    });
-  }
-
-  // Smooth scroll
-  document.querySelectorAll('a[href^="#"]').forEach((link) => {
-    link.addEventListener("click", (e) => {
-      const target = document.querySelector(link.getAttribute("href"));
-      if (target) {
-        e.preventDefault();
-        target.scrollIntoView({ behavior: "smooth" });
-      }
-    });
+function updateActiveThumbs() {
+  DOM.lightboxThumbs.querySelectorAll('.lightbox-thumb').forEach((t, i) => {
+    const active = i === state.index;
+    t.classList.toggle('active', active);
+    if (active) t.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
   });
+}
 
-  // Logo click scrolls to top
-  const logoBrand = document.querySelector(".logo-brand");
-  if (logoBrand) {
-    logoBrand.style.cursor = "pointer";
-    logoBrand.addEventListener("click", () => {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    });
+function applyMedia() {
+  const item = state.gallery.items[state.index];
+
+  if (item.type === 'video') {
+    DOM.lightboxImg.style.display = 'none';
+    DOM.lightboxVideo.style.display = 'block';
+    if (DOM.lightboxVideo.src !== location.origin + item.src) {
+      DOM.lightboxVideo.src = item.src;
+      DOM.lightboxVideo.load();
+    }
+    DOM.lightboxVideo.play().catch(() => {});
+  } else {
+    DOM.lightboxVideo.style.display = 'none';
+    DOM.lightboxImg.style.display = 'block';
+    DOM.lightboxImg.src = item.src;
   }
 
-  // Footer year
-  const yearEl = document.getElementById("footerYear");
-  if (yearEl) yearEl.textContent = new Date().getFullYear();
+  updateCounter();
+  updateActiveThumbs();
+  DOM.lightboxImg.classList.remove('lb-fading');
+  DOM.lightboxVideo.classList.remove('lb-fading');
+}
 
-  // Scroll to top
-  const scrollTopBtn = document.getElementById("scrollTop");
-  if (scrollTopBtn) {
-    window.addEventListener("scroll", () => {
-      scrollTopBtn.classList.toggle("visible", window.scrollY > 400);
-    }, { passive: true });
-    scrollTopBtn.addEventListener("click", () => {
-      if (navigator.vibrate) navigator.vibrate(22);
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    });
+function renderLightbox(skipAnim) {
+  if (skipAnim) {
+    applyMedia();
+    return;
   }
+  DOM.lightboxImg.classList.add('lb-fading');
+  DOM.lightboxVideo.classList.add('lb-fading');
+  setTimeout(applyMedia, 150);
+}
 
-  // Fade-in on scroll
-  const fadeEls = document.querySelectorAll(".fade-in-el");
-  if (fadeEls.length) {
-    const fadeObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("visible");
-            fadeObserver.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.1 },
-    );
-    fadeEls.forEach((el) => fadeObserver.observe(el));
-  }
-
-  // Lightbox keyboard & touch
-  let lbTouchStartX = 0;
-
-  document.addEventListener('keydown', (e) => {
-    const lb = document.getElementById('lightbox');
-    if (!lb || lb.hidden) return;
-    if (e.key === 'Escape') window.closeLightbox();
-    if (e.key === 'ArrowLeft') window.lightboxNav(-1);
-    if (e.key === 'ArrowRight') window.lightboxNav(1);
+function buildThumbVideo(i) {
+  const div = document.createElement('div');
+  div.className = 'lightbox-thumb lightbox-thumb-video';
+  div.setAttribute('role', 'button');
+  div.setAttribute('tabindex', '0');
+  div.setAttribute('aria-label', 'Video snimak');
+  div.innerHTML = `<svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>`;
+  div.addEventListener('click', () => { state.index = i; renderLightbox(); });
+  div.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') { state.index = i; renderLightbox(); }
   });
+  return div;
+}
 
-  document.addEventListener('touchstart', (e) => {
-    if (document.getElementById('lightbox')?.hidden !== false) return;
-    lbTouchStartX = e.changedTouches[0].screenX;
-  }, { passive: true });
-
-  document.addEventListener('touchend', (e) => {
-    if (document.getElementById('lightbox')?.hidden !== false) return;
-    const dx = e.changedTouches[0].screenX - lbTouchStartX;
-    if (Math.abs(dx) > 50) window.lightboxNav(dx < 0 ? 1 : -1);
-  }, { passive: true });
-
-  document.getElementById('lightbox')?.addEventListener('click', (e) => {
-    if (e.target.id === 'lightbox') window.closeLightbox();
+function buildThumbImage(item, i) {
+  const img = document.createElement('img');
+  img.src = item.src;
+  img.alt = `Slika ${i + 1}`;
+  img.className = 'lightbox-thumb';
+  img.loading = 'lazy';
+  img.setAttribute('tabindex', '0');
+  img.setAttribute('role', 'button');
+  img.addEventListener('click', () => { state.index = i; renderLightbox(); });
+  img.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') { state.index = i; renderLightbox(); }
   });
+  return img;
+}
 
-  // Animated counters
-  const counters = document.querySelectorAll(".stat-number");
-  if (counters.length) {
-    const counterObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting && !entry.target.dataset.animated) {
-            entry.target.dataset.animated = "true";
-            animateCounter(entry.target);
-          }
-        });
-      },
-      { threshold: 0.5 },
-    );
-    counters.forEach((c) => counterObserver.observe(c));
+function buildThumbs() {
+  DOM.lightboxThumbs.innerHTML = '';
+  state.gallery.items.forEach((item, i) => {
+    const el = item.type === 'video' ? buildThumbVideo(i) : buildThumbImage(item, i);
+    DOM.lightboxThumbs.appendChild(el);
+  });
+}
+
+function openLightbox(galleryId, index) {
+  state.gallery = GALLERIES[galleryId];
+  if (!state.gallery) return;
+  state.index = index;
+
+  DOM.lightbox.hidden = false;
+  document.body.style.overflow = 'hidden';
+  DOM.lightboxTitle.textContent = state.gallery.title;
+
+  buildThumbs();
+  renderLightbox(true);
+}
+
+function closeLightbox() {
+  pauseVideo();
+  DOM.lightbox.hidden = true;
+  document.body.style.overflow = '';
+}
+
+function lightboxNav(dir) {
+  if (!state.gallery) return;
+  pauseVideo();
+  state.index = (state.index + dir + state.gallery.items.length) % state.gallery.items.length;
+  renderLightbox();
+}
+
+window.openLightbox  = openLightbox;
+window.closeLightbox = closeLightbox;
+window.lightboxNav   = lightboxNav;
+
+// ─── Nav ─────────────────────────────────────────────────
+
+function closeNav() {
+  DOM.navList.classList.remove('nav-open');
+  DOM.navToggle.classList.remove('active');
+  DOM.navToggle.setAttribute('aria-expanded', 'false');
+}
+
+function toggleNav() {
+  const isOpen = DOM.navList.classList.toggle('nav-open');
+  DOM.navToggle.classList.toggle('active', isOpen);
+  DOM.navToggle.setAttribute('aria-expanded', String(isOpen));
+}
+
+// ─── Contact form ─────────────────────────────────────────
+
+function isValidEmail(email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+function getFormData() {
+  return {
+    name:     document.getElementById('nameInput').value.trim(),
+    email:    document.getElementById('emailInput').value.trim(),
+    category: document.getElementById('categoryInput').value,
+    message:  document.getElementById('messageInput').value.trim(),
+  };
+}
+
+function setSubmitState(btn, sending) {
+  btn.textContent = sending ? 'Slanje...' : 'Pošalji poruku';
+  btn.disabled = sending;
+}
+
+function handleFormSubmit(e) {
+  e.preventDefault();
+  const { name, email, category, message } = getFormData();
+
+  if (!name || !email || !category || !message) {
+    alert('Molimo popunite sva obavezna polja!');
+    return;
+  }
+  if (!isValidEmail(email)) {
+    alert('Molimo unesite validan email!');
+    return;
   }
 
-  // Scroll spy
-  const sections = document.querySelectorAll("section[id]");
-  const navLinks = document.querySelectorAll('.nav-link[href^="#"]');
+  const btn = DOM.contactForm.querySelector('button[type="submit"]');
+  setSubmitState(btn, true);
 
-  if (sections.length && navLinks.length) {
-    const spyObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            navLinks.forEach((link) => {
-              link.classList.toggle(
-                "active",
-                link.getAttribute("href") === `#${entry.target.id}`,
-              );
-            });
-          }
-        });
-      },
-      { rootMargin: "-40% 0px -60% 0px" },
-    );
-    sections.forEach((s) => spyObserver.observe(s));
-  }
-});
+  emailjs
+    .sendForm(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, DOM.contactForm)
+    .then(() => {
+      alert(`Hvala Vam, ${name}! Poruka je uspešno poslata.`);
+      DOM.contactForm.reset();
+    })
+    .catch(() => {
+      alert('Greška pri slanju. Pokušajte ponovo ili nas kontaktirajte telefonom.');
+    })
+    .finally(() => setSubmitState(btn, false));
+}
+
+// ─── Scroll & UI ──────────────────────────────────────────
+
+function handleScrollTopVisibility() {
+  DOM.scrollTopBtn.classList.toggle('visible', window.scrollY > 400);
+}
+
+function scrollToTop() {
+  if (navigator.vibrate) navigator.vibrate(22);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function handleSmoothLink(e) {
+  const target = document.querySelector(e.currentTarget.getAttribute('href'));
+  if (!target) return;
+  e.preventDefault();
+  target.scrollIntoView({ behavior: 'smooth' });
+}
+
+// ─── Animations ───────────────────────────────────────────
 
 function animateCounter(el) {
   const text = el.textContent;
   const num = parseInt(text);
-  const suffix = text.replace(/\d/g, "");
+  const suffix = text.replace(/\d/g, '');
   const steps = 60;
   const increment = num / steps;
   let step = 0;
@@ -350,3 +294,108 @@ function animateCounter(el) {
     if (step >= steps) clearInterval(timer);
   }, 2000 / steps);
 }
+
+function initFadeObserver() {
+  if (!DOM.fadeEls.length) return;
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.1 }
+  );
+  DOM.fadeEls.forEach((el) => observer.observe(el));
+}
+
+function initCounterObserver() {
+  if (!DOM.statCounters.length) return;
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting && !entry.target.dataset.animated) {
+          entry.target.dataset.animated = 'true';
+          animateCounter(entry.target);
+        }
+      });
+    },
+    { threshold: 0.5 }
+  );
+  DOM.statCounters.forEach((el) => observer.observe(el));
+}
+
+function initScrollSpy() {
+  if (!DOM.sections.length || !DOM.navLinks.length) return;
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          DOM.navLinks.forEach((link) => {
+            link.classList.toggle('active', link.getAttribute('href') === `#${entry.target.id}`);
+          });
+        }
+      });
+    },
+    { rootMargin: '-40% 0px -60% 0px' }
+  );
+  DOM.sections.forEach((s) => observer.observe(s));
+}
+
+function initLightboxEvents() {
+  document.addEventListener('keydown', (e) => {
+    if (DOM.lightbox.hidden) return;
+    if (e.key === 'Escape')     closeLightbox();
+    if (e.key === 'ArrowLeft')  lightboxNav(-1);
+    if (e.key === 'ArrowRight') lightboxNav(1);
+  });
+
+  document.addEventListener('touchstart', (e) => {
+    if (DOM.lightbox.hidden) return;
+    state.touchStartX = e.changedTouches[0].screenX;
+  }, { passive: true });
+
+  document.addEventListener('touchend', (e) => {
+    if (DOM.lightbox.hidden) return;
+    const dx = e.changedTouches[0].screenX - state.touchStartX;
+    if (Math.abs(dx) > 50) lightboxNav(dx < 0 ? 1 : -1);
+  }, { passive: true });
+
+  DOM.lightbox.addEventListener('click', (e) => {
+    if (e.target.id === 'lightbox') closeLightbox();
+  });
+}
+
+// ─── Init ─────────────────────────────────────────────────
+
+document.addEventListener('DOMContentLoaded', () => {
+  DOM.navToggle.addEventListener('click', toggleNav);
+  DOM.navList.querySelectorAll('.nav-link').forEach((link) => {
+    link.addEventListener('click', closeNav);
+  });
+
+  if (DOM.contactForm) {
+    DOM.contactForm.addEventListener('submit', handleFormSubmit);
+  }
+
+  DOM.smoothLinks.forEach((link) => link.addEventListener('click', handleSmoothLink));
+
+  if (DOM.logoBrand) {
+    DOM.logoBrand.style.cursor = 'pointer';
+    DOM.logoBrand.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+  }
+
+  if (DOM.footerYear) DOM.footerYear.textContent = new Date().getFullYear();
+
+  if (DOM.scrollTopBtn) {
+    window.addEventListener('scroll', handleScrollTopVisibility, { passive: true });
+    DOM.scrollTopBtn.addEventListener('click', scrollToTop);
+  }
+
+  initFadeObserver();
+  initCounterObserver();
+  initScrollSpy();
+  initLightboxEvents();
+});
