@@ -183,7 +183,6 @@ body {
 
 /* Hero Section */
 .hero {
-  background: linear-gradient(135deg, #050b18 0%, #0c1e40 55%, #142850 100%);
   color: var(--white);
   padding: 100px 0;
   text-align: center;
@@ -200,17 +199,6 @@ body {
     rgba(26, 86, 219, 0.18) 0%,
     transparent 70%
   );
-  pointer-events: none;
-}
-
-.hero::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 90px;
-  background: linear-gradient(to bottom, transparent, #060e1f);
   pointer-events: none;
 }
 
