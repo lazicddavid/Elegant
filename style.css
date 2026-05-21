@@ -319,7 +319,13 @@ body {
 }
 
 .section-alt {
-  background: rgba(12, 26, 54, 0.55);
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(12, 26, 54, 0.55) 10%,
+    rgba(12, 26, 54, 0.55) 90%,
+    transparent
+  );
 }
 
 .section-header {
