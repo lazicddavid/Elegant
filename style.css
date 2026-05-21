@@ -344,6 +344,8 @@ body {
 .section-header p {
   font-size: 18px;
   color: var(--text-secondary);
+  line-height: 1.6;
+  text-wrap: balance;
 }
 
 /* Properties Grid */
