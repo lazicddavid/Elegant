@@ -203,6 +203,17 @@ body {
   pointer-events: none;
 }
 
+.hero::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 90px;
+  background: linear-gradient(to bottom, transparent, #060e1f);
+  pointer-events: none;
+}
+
 .hero-inner {
   display: flex;
   align-items: center;
