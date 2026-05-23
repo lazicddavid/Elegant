@@ -412,6 +412,9 @@ body {
   font-size: 18px;
   margin-bottom: 8px;
   color: var(--white);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .property-location {
