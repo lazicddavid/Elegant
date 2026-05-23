@@ -504,6 +504,7 @@ body {
   color: var(--text-secondary);
   margin-bottom: 20px;
   line-height: 1.8;
+  max-width: 620px;
 }
 
 .about-stats {
