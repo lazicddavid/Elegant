@@ -167,6 +167,13 @@ body {
   flex-shrink: 0;
 }
 
+.nav-link-phone:hover {
+  background: var(--gold);
+  color: #060e1f;
+  border-color: var(--gold);
+  border-bottom: 1.5px solid var(--gold);
+}
+
 /* Hamburger */
 .nav-toggle {
   display: none;
