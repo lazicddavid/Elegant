@@ -179,6 +179,11 @@ body {
   opacity: 0.88;
 }
 
+.nav-link-phone:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+
 /* Hamburger */
 .nav-toggle {
   display: none;
