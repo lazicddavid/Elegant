@@ -1222,6 +1222,12 @@ body {
     display: flex;
   }
 
+  .nav-link-phone {
+    align-self: flex-end;
+    padding: 7px 14px;
+    font-size: 13px;
+  }
+
   .hero {
     padding: 50px 0;
   }
