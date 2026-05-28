@@ -1,3 +1,15 @@
+@property --shine-x {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: -40%;
+}
+
+@property --shine-y {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: -40%;
+}
+
 @font-face {
   font-family: "University Roman Std";
   src: url("/fonts/UniversityRomanStdBold.woff") format("woff");
@@ -96,6 +108,22 @@ body {
   font-weight: 700;
   font-size: 82px;
   text-transform: none;
+  background:
+    radial-gradient(
+      ellipse 80% 65% at var(--shine-x) var(--shine-y),
+      rgba(180, 235, 255, 0) 0%,
+      rgba(30, 155, 255, 0.92) 32%,
+      transparent 62%
+    ),
+    var(--white);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: 0.8px var(--gold);
+  paint-order: stroke fill;
+  transition:
+    --shine-x 0.07s linear,
+    --shine-y 0.07s linear;
 }
 
 .logo-draskovic {

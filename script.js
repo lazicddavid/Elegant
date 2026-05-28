@@ -62,6 +62,7 @@ const DOM = {
   contactForm: document.getElementById("contactForm"),
   scrollTopBtn: document.getElementById("scrollTop"),
   logoBrand: document.querySelector(".logo-brand"),
+  logoElegant: document.querySelector(".logo-elegant"),
   footerYear: document.getElementById("footerYear"),
   fadeEls: document.querySelectorAll(".fade-in-el"),
   sections: document.querySelectorAll("section[id]"),
@@ -398,6 +399,22 @@ function initScrollSpy() {
   DOM.sections.forEach((s) => observer.observe(s));
 }
 
+/* Prati poziciju miša i ažurira glass sjaj na "Elegant" tekstu */
+function initLogoShine() {
+  if (!DOM.logoElegant) return;
+  DOM.logoElegant.addEventListener("mousemove", (e) => {
+    const rect = DOM.logoElegant.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    DOM.logoElegant.style.setProperty("--shine-x", `${x}%`);
+    DOM.logoElegant.style.setProperty("--shine-y", `${y}%`);
+  });
+  DOM.logoElegant.addEventListener("mouseleave", () => {
+    DOM.logoElegant.style.setProperty("--shine-x", "-40%");
+    DOM.logoElegant.style.setProperty("--shine-y", "-40%");
+  });
+}
+
 /* Dodaje event listenere za lightbox — tastatura, swipe i klik na pozadinu */
 function initLightboxEvents() {
   document.addEventListener("keydown", (e) => {
@@ -468,4 +485,5 @@ document.addEventListener("DOMContentLoaded", () => {
   initCounterObserver();
   initScrollSpy();
   initLightboxEvents();
+  initLogoShine();
 });
