@@ -303,7 +303,6 @@ body {
 .btn-primary:hover {
   background: #c9a03f;
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(212, 175, 55, 0.35);
 }
 
 .btn-secondary {
