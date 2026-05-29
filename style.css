@@ -4,6 +4,9 @@
   initial-value: -40%;
 }
 
+.title-logo {
+}
+
 @property --shine-y {
   syntax: "<percentage>";
   inherits: false;
