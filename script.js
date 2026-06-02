@@ -146,6 +146,11 @@ function renderLightbox(skipAnim) {
   setTimeout(applyMedia, 150);
 }
 
+
+
+ function  (params) {
+  
+ }
 /* Kreira thumbnail dugme za video snimak */
 function buildThumbVideo(i) {
   const div = document.createElement("div");
