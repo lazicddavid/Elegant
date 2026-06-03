@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/lazicddavid/Elegant#readme",
   "devDependencies": {
+    "sharp": "^0.34.5",
     "vite": "^8.0.11"
   }
 }
