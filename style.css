@@ -21,6 +21,7 @@
 
 /* CSS Variables */
 :root {
+  --navy-deep: var(--accent-blue);
   --navy-deep: #060e1f;
   --navy-mid: #0c1a36;
   --navy-light: #142850;
