@@ -61,6 +61,7 @@ const DOM = {
   navList: document.querySelector(".nav-list"),
   contactForm: document.getElementById("contactForm"),
   scrollTopBtn: document.getElementById("scrollTop"),
+  contactFloatBtn: document.querySelector(".contact-float"),
   logoBrand: document.querySelector(".logo-brand"),
   logoElegant: document.querySelector(".logo-elegant"),
   footerYear: document.getElementById("footerYear"),
@@ -310,6 +311,14 @@ function handleFormSubmit(e) {
 /* Prikazuje ili skriva dugme "nazad na vrh" u zavisnosti od scroll pozicije */
 function handleScrollTopVisibility() {
   DOM.scrollTopBtn.classList.toggle("visible", window.scrollY > 400);
+  const kontakt = document.getElementById("kontakt");
+  const nearContact = kontakt
+    ? window.scrollY + window.innerHeight >= kontakt.offsetTop - 100
+    : false;
+  DOM.contactFloatBtn?.classList.toggle(
+    "visible",
+    window.scrollY > 400 && !nearContact
+  );
 }
 
 /* Skroluje stranicu na vrh uz haptički feedback na mobilnim uređajima */
