@@ -837,6 +837,12 @@ body {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
   }
+
+  .contact-float {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }
 
 /* Keyboard focus styles */
