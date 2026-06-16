@@ -1303,4 +1303,9 @@ body {
   .nav-link {
     font-size: 14px;
   }
+
+  .contact-float {
+    bottom: 20px;
+    right: 80px;
+  }
 }
