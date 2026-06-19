@@ -30,8 +30,8 @@
   --text-primary: #dde8f5;
   --text-secondary: #6e94bb;
   --border: rgba(26, 86, 219, 0.2);
-  --shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-  --shadow-sm: 0 4px 20px rgba(0, 0, 0, 0.3);
+  --shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
+  --shadow-sm: 0 4px 20px rgba(0, 0, 0, 0.28);
 }
 
 /* Global Styles */
