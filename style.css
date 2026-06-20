@@ -1268,6 +1268,10 @@ body {
     font-size: 20px;
   }
 
+  .section-header p {
+    font-size: 15px;
+  }
+
   .property-card {
     padding: 0;
   }
