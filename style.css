@@ -1263,6 +1263,10 @@ body {
     letter-spacing: -0.5px;
   }
 
+  .section {
+    padding: 38px 0;
+  }
+
   .section-header {
     margin-bottom: 26px;
   }
