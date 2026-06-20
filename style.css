@@ -1259,6 +1259,8 @@ body {
 
   .hero-content h2 {
     font-size: 22px;
+    line-height: 1.25;
+    letter-spacing: -0.5px;
   }
 
   .section-header {
