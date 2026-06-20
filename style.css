@@ -1260,6 +1260,10 @@ body {
     font-size: 22px;
   }
 
+  .section-header {
+    margin-bottom: 26px;
+  }
+
   .section-header h2 {
     font-size: 20px;
   }
