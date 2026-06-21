@@ -36,6 +36,7 @@
 
 /* Global Styles */
 * {
+  padding: 20px;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -787,7 +788,6 @@ body {
   transform: translateY(-3px);
 }
 
-
 /* Respect reduced motion preference */
 @media (prefers-reduced-motion: reduce) {
   .fade-in-el {
@@ -800,7 +800,6 @@ body {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
   }
-
 }
 
 /* Keyboard focus styles */
@@ -1286,5 +1285,4 @@ body {
   .nav-link {
     font-size: 14px;
   }
-
 }
