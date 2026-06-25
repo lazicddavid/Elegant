@@ -36,10 +36,9 @@
 
 /* Global Styles */
 * {
-
   margin: 0;
   padding: 0;
-  margin: maxwidth;
+
   box-sizing: border-box;
 }
 
@@ -289,6 +288,7 @@ body {
 }
 
 .btn-secondary {
+  color: #000;
   background: transparent;
   color: var(--white);
   border: 2px solid rgba(255, 255, 255, 0.45);
